@@ -81,7 +81,7 @@ void print(stack *s)
         return;
     }
 
-    Printf("Stack contents (top to bottom): ");
+    printf("Stack contents (top to bottom): ");
 
     node *current = s->head;
     while (current != NULL) {
