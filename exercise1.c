@@ -11,15 +11,22 @@
 #include "taylor_sine.h"
 
 /* 
- * Calculate sine using Taylor series approximation
- * x: input value in radians
- * n: number of terms in the series
- * Returns: approximation of sin(x)
+ * udregning af sin ved brug af Taylor series approximation
+ * x: input af funktionen i radianer
+ * n: nummer af terms i funktionen
+ * Returns: approximation af sin(x)
  */
 double taylor_sine(double x, int n) {
-    // TODO: Implement the Taylor series approximation for sine
-    // Hint: The series is: x - x^3/3! + x^5/5! - x^7/7! + ...
-    // Use a loop to calculate n terms of the series
-    
-    return 0.0; // placeholder - replace with your implementation
+    double result = 0.0;
+    double term = x; // First term is x
+    int sign = 1; // starter positivt
+
+    for (int i = 1; i <= n; i++) {
+        result += sign * term; // tilføjer current term til result
+        // udregner næste term i serien
+        term = term * x * x / ((2 * i) * (2 * i + 1)); // x^(2i+1) / (2i+1)!
+        sign = -sign; // skifter fortegn
+    }
+
+    return result;
 }
