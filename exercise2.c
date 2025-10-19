@@ -21,6 +21,7 @@ void initialize(stack *s)
 {
     /* pre-condition: true */
     /* post-condition: stack is empty */
+    s->head = NULL; //stacken er tom
 }
 
 /* Insert item x at the top of stack s */
@@ -28,7 +29,15 @@ void push(int x, stack *s)
 {
     /* pre-condition: true (linked list can always accept more items) */
     /* post-condition: x is added to top of stack */
-
+    node *new_node =(node *)malloc(sizeof(node)); //allokerer hukommelse til en ny node
+    if (new_node == NULL) {
+        // Håndter hukommelsesallokeringsfejl
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+    new_node->data = x; //sætter dataen i noden til x
+    new_node->next = s->head; //sætter next pointeren til den nuværende top
+    s->head = new_node; //opdaterer stackens head til den nye node
 }
 
 /* Return (and remove) the top item of stack s */
@@ -36,8 +45,17 @@ int pop(stack *s)
 {
   /* pre-condition: stack must not be empty */
   /* post-condition: top item is removed and returned */
+    if (empty(s)) {
+        fprintf(stderr, "Stack underflow: Attempt to pop from an empty stack\n");
+        exit(1); // Exit or handle error as appropriate
+    }
+    node *temp = s->head; //midlertidig pointer til den nuværende top
+    int value = temp->data; //gemmer dataen fra toppen
 
-  return 0; // placeholder - replace with actual implementation
+    s->head = temp->next; //opdaterer head til næste element
+    free(temp); //frigør hukommelsen for den gamle top
+
+return value; //returnerer den gemte værdi
 }
 
 /* Test whether a stack can accept more pushes */
@@ -54,12 +72,23 @@ bool empty(stack *s)
     /* pre-condition: true */
     /* post-condition: returns true if stack is empty, false otherwise */
 
-    return false; // placeholder - replace with actual implementation
-}
-
+    return (s->head == NULL); //stacken er tom hvis head er NULL
 /* Print the contents of the stack */
 void print(stack *s)
 {
+    if(empty(s)) {
+        printf("Stack is empty.\n");
+        return;
+    }
+
+    Printf("Stack contents (top to bottom): ");
+
+    node *current = s->head;
+    while (current != NULL) {
+        printf("%d ", current->data); //printer dataen i den nuværende node
+        current = current->next; //går videre til næste node
+    }
+    printf("\n");
     /* pre-condition: true */
     /* post-condition: prints all items in the stack */
 }

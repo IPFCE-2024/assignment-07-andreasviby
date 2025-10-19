@@ -8,6 +8,14 @@
  * Taylor series for sin(x) = x - x^3/3! + x^5/5! - x^7/7! + ...
  */
 
+ // opgave c 
+// taylorfunktionen giver samme resultat som sin(x) for små x 
+// når n (antal af termer) øges bliver resultatet mere præcist især for små x'er
+// for store x'er som 10 eller 50 bliver resultet dog hurtigt upræcist fordi 
+// de høje potenser af x gør udtrykket numerisk ustabilt
+// hvis man reducerer x med 2π så det altd ligger mellem -π og π forbedres præcisionen betydeligt
+// selv hvis man bruger større inputs
+
 #include "taylor_sine.h"
 
 /* 
