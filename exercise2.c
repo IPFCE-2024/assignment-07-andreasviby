@@ -74,6 +74,7 @@ bool empty(stack *s)
 
     return (s->head == NULL); //stacken er tom hvis head er NULL
 /* Print the contents of the stack */
+}
 void print(stack *s)
 {
     if(empty(s)) {
